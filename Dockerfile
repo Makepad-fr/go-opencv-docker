@@ -7,9 +7,9 @@ ARG GO_VERSION
 
 WORKDIR /app
 
-RUN apt-get install -y wget tar --no-install-recommends
-
-RUN wget -q "https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz" && \ 
+RUN apt-get update -y && \
+    apt-get install -y wget tar --no-install-recommends && \
+    wget -q "https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz" && \
     tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz && \
     rm ./go${GO_VERSION}.linux-amd64.tar.gz
 
