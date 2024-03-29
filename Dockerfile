@@ -3,7 +3,7 @@ ARG DEBIAN_TAG
 ARG TARGETPLATFORM
 ARG GO_VERSION
 
-FROM makepad/opencv:${DEBIAN_TAG}-${OPENCV_VERSION}
+FROM --platform=${TARGETPLATFORM} makepad/opencv:${DEBIAN_TAG}-${OPENCV_VERSION}
 
 
 WORKDIR /app
@@ -13,10 +13,8 @@ RUN echo ${TARGETPLATFORM}
 RUN apt-get update -y && \
     apt-get install -y wget tar --no-install-recommends
 
-RUN echo "DEBIAN_TAG=${DEBIAN_TAG}"
-RUN echo "OPENCV_VERSION=${OPENCV_VERSION}"
-RUN echo "GO_VERSION=${GO_VERSION}"
-RUN echo "TARGETPLATFORM=${TARGETPLATFORM}"
+ARG TARGETPLATFORM
+ARG GO_VERSION
 
 RUN GO_ARCH=$(echo $TARGETPLATFORM | sed 's|/|-|g') && \
     echo "https://go.dev/dl/go${GO_VERSION}.${GO_ARCH}.tar.gz"
