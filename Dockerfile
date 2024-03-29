@@ -13,6 +13,11 @@ RUN echo ${TARGETPLATFORM}
 RUN apt-get update -y && \
     apt-get install -y wget tar --no-install-recommends
 
+RUN echo "DEBIAN_TAG=${DEBIAN_TAG}"
+RUN echo "OPENCV_VERSION=${OPENCV_VERSION}"
+RUN echo "GO_VERSION=${GO_VERSION}"
+RUN echo "TARGETPLATFORM=${TARGETPLATFORM}"
+
 RUN GO_ARCH=$(echo $TARGETPLATFORM | sed 's|/|-|g') && \
     echo "https://go.dev/dl/go${GO_VERSION}.${GO_ARCH}.tar.gz"
 #     wget -q "https://go.dev/dl/go${GO_VERSION}.${GO_ARCH}.tar.gz" && \
